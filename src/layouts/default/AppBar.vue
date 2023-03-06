@@ -25,12 +25,15 @@
       </v-navigation-drawer>
 </template>
 
-<script setup lang="ts">
-  const drawer: boolean = true;
-  const items = [
+<script lang="ts">
+export default {
+    data: () => ({
+      drawer: false,
+      group: null,
+      items: [
         {
           title: 'Foo',
-          value: 'temp',
+          value: 'foo',
         },
         {
           title: 'Bar',
@@ -44,5 +47,13 @@
           title: 'Buzz',
           value: 'buzz',
         },
-      ];
+      ],
+    }),
+
+    watch: {
+      group () {
+        this.drawer = false
+      },
+    },
+  }
 </script>
