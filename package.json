@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
+    "build": "vite build --mode prod",
     "preview": "vite preview",
-    "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "lint": "eslint src --ignore-path .gitignore",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write src/",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "vue": "^3.2.47",
