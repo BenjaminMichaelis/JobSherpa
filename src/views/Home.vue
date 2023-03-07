@@ -5,7 +5,7 @@
     </v-row>
     <v-row>
       <v-col v-for="job in jobs" :key="job.id" cols="2" lg="3">
-        <JobCard />
+        <JobCard :title="job.title" :company="job.company" />
       </v-col>
     </v-row>
   </v-container>
@@ -18,22 +18,22 @@ const jobs = [
   {
     id: 1,
     title: "Software Engineer",
-    value: "Google",
+    company: "Google",
   },
   {
     id: 2,
     title: "Waitress",
-    value: "The Restaurant",
+    company: "The Restaurant",
   },
   {
     id: 3,
     title: "Basketball Player",
-    value: "Chicago Bulls",
+    company: "Chicago Bulls",
   },
   {
     id: 4,
     title: "Student",
-    value: "WSU",
+    company: "WSU",
   },
 ];
 </script>

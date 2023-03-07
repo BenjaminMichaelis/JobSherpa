@@ -1,10 +1,10 @@
 <template>
   <v-card :loading="loading" class="mx-auto my-12" max-width="374">
     <v-card-item>
-      <v-card-title>Example Job Title</v-card-title>
+      <v-card-title>{{ title }}</v-card-title>
 
       <v-card-subtitle>
-        <span class="me-1">Sample Company</span>
+        <span class="me-1">{{ company }}</span>
       </v-card-subtitle>
     </v-card-item>
 
@@ -43,6 +43,9 @@
 </template>
 
 <script lang="ts" setup>
+defineProps<{
+  title: string;
+  company: string;
+}>();
 const loading = false;
-const selection = 1;
 </script>
