@@ -14,27 +14,26 @@
 <script lang="ts" setup>
 import JobCard from "@/components/JobCard.vue";
 
-
-let jobs = [
+const jobs = [
   {
     id: 1,
     title: "Software Engineer",
-    value: "Google"
+    value: "Google",
   },
   {
     id: 2,
     title: "Waitress",
-    value: "The Restaurant"
+    value: "The Restaurant",
   },
   {
     id: 3,
     title: "Basketball Player",
-    value: "Chicago Bulls"
+    value: "Chicago Bulls",
   },
   {
     id: 4,
     title: "Student",
-    value: "WSU"
-  }
+    value: "WSU",
+  },
 ];
 </script>

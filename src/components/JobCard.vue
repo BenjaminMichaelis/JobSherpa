@@ -13,8 +13,8 @@
 
       <div class="my-4 text-subtitle-1">Salary: $40,000</div>
 
-      <div class="px-4">
-        <span class="text-subtitle-1">Skills</span>
+      <div>
+        <span class="text-subtitle-1">Skills:</span>
         <v-chip-group v-model="selection">
           <v-chip>SQL</v-chip>
 
@@ -38,9 +38,7 @@
     <v-divider class="mx-4 mb-1"></v-divider>
 
     <v-card-title>Recent Activity</v-card-title>
-    <v-card-text>
-      Submitted Resume on January 8th
-    </v-card-text>
+    <v-card-text> Submitted Resume on January 8th </v-card-text>
   </v-card>
 </template>
 

@@ -31,22 +31,22 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 const drawer = ref(false);
-let items = [
+const items = [
   {
     title: "Foo",
-    value: "foo"
+    value: "foo",
   },
   {
     title: "Bar",
-    value: "bar"
+    value: "bar",
   },
   {
     title: "Fizz",
-    value: "fizz"
+    value: "fizz",
   },
   {
     title: "Buzz",
-    value: "buzz"
-  }
+    value: "buzz",
+  },
 ];
 </script>
