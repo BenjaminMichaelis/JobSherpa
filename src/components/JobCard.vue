@@ -15,7 +15,7 @@
 
       <div>
         <span class="text-subtitle-1">Skills:</span>
-        <v-chip-group v-model="selection">
+        <v-chip-group>
           <v-chip>SQL</v-chip>
 
           <v-chip>React</v-chip>
