@@ -4,7 +4,7 @@
       <v-card-title>{{ title }}</v-card-title>
 
       <v-card-subtitle>
-        <span class="me-1">{{company}}</span>
+        <span class="me-1">{{ company }}</span>
       </v-card-subtitle>
     </v-card-item>
 
@@ -44,9 +44,8 @@
 
 <script lang="ts" setup>
 defineProps<{
-  title: string,
-  company: string
-}>()
+  title: string;
+  company: string;
+}>();
 const loading = false;
-const selection = 1;
 </script>

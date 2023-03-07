@@ -5,7 +5,7 @@
     </v-row>
     <v-row>
       <v-col v-for="job in jobs" :key="job.id" cols="2" lg="3">
-        <JobCard :title="job.title" :company="job.company"/>
+        <JobCard :title="job.title" :company="job.company" />
       </v-col>
     </v-row>
   </v-container>
