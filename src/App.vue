@@ -12,7 +12,7 @@
 
       <v-btn variant="text" icon="mdi-magnify"></v-btn>
 
-      <v-btn variant="text" icon="mdi-login"></v-btn>
+      <v-btn :to="'/login'" variant="text" icon="mdi-login"></v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer">
@@ -30,6 +30,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import router from "./router";
+const loginDialog = false;
 const drawer = ref(false);
 const items = [
   {
