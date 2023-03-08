@@ -2,26 +2,26 @@
   <v-app id="vue-app">
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list>
-          <div v-for="(link, i) in sidebarLinks" :key="i">
-            <template v-if="link.isVisible">
-              <v-divider v-if="link.isDivider" />
+        <div v-for="(link, i) in sidebarLinks" :key="i">
+          <template v-if="link.isVisible">
+            <v-divider v-if="link.isDivider" />
 
-              <v-list-item v-else link :to="link.route">
-                <v-row class="align-center">
-                  <v-col cols="2">
-                    <v-list-item-action>
-                      <v-icon> {{ link.icon }} </v-icon>
-                    </v-list-item-action>
-                  </v-col>
-                  <v-col cols="auto">
-                    <v-list-item>
-                      <v-list-item-title> {{ link.name }} </v-list-item-title>
-                    </v-list-item>
-                  </v-col>
-                </v-row>
-              </v-list-item>
-            </template>
-          </div>
+            <v-list-item v-else link :to="link.route">
+              <v-row class="align-center">
+                <v-col cols="2">
+                  <v-list-item-action>
+                    <v-icon> {{ link.icon }} </v-icon>
+                  </v-list-item-action>
+                </v-col>
+                <v-col cols="auto">
+                  <v-list-item>
+                    <v-list-item-title> {{ link.name }} </v-list-item-title>
+                  </v-list-item>
+                </v-col>
+              </v-row>
+            </v-list-item>
+          </template>
+        </div>
 
         <v-divider />
         <v-list-item>
@@ -72,6 +72,27 @@ const sidebarLinks = [
     route: "/",
     icon: "mdi-magnify",
     name: "Home",
+    isVisible: true,
+    isDivider: false,
+  },
+  {
+    route: "",
+    icon: "",
+    name: "",
+    isVisible: true,
+    isDivider: true,
+  },
+  {
+    route: "/login",
+    icon: "mdi-login",
+    name: "Login",
+    isVisible: true,
+    isDivider: false,
+  },
+  {
+    route: "/register",
+    icon: "mdi-account-plus",
+    name: "Register",
     isVisible: true,
     isDivider: false,
   },
