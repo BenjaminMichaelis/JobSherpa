@@ -1,23 +1,58 @@
 <template>
-  <v-app>
-    <v-app-bar color="primary" prominent>
-      <v-app-bar-nav-icon
-        variant="text"
-        @click.stop="drawer = !drawer"
-      ></v-app-bar-nav-icon>
+  <v-app id="vue-app">
+    <v-navigation-drawer v-model="drawer" app clipped>
+      <v-list>
+          <div v-for="(link, i) in sidebarLinks" :key="i">
+            <template v-if="link.isVisible">
+              <v-divider v-if="link.isDivider" />
 
-      <v-toolbar-title>JobSherpa</v-toolbar-title>
+              <v-list-item v-else link :to="link.route">
+                <v-row class="align-center">
+                  <v-col cols="2">
+                    <v-list-item-action>
+                      <v-icon> {{ link.icon }} </v-icon>
+                    </v-list-item-action>
+                  </v-col>
+                  <v-col cols="auto">
+                    <v-list-item>
+                      <v-list-item-title> {{ link.name }} </v-list-item-title>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
+              </v-list-item>
+            </template>
+          </div>
 
-      <v-spacer></v-spacer>
-
-      <v-btn variant="text" icon="mdi-magnify"></v-btn>
-
-      <v-btn :to="'/login'" variant="text" icon="mdi-login"></v-btn>
-    </v-app-bar>
-
-    <v-navigation-drawer v-model="drawer">
-      <v-list :items="items"></v-list>
+        <v-divider />
+        <v-list-item>
+          <v-row class="align-center">
+            <v-col cols="2">
+              <v-list-item-action>
+                <v-icon>fas fa-sign-out</v-icon>
+              </v-list-item-action>
+            </v-col>
+            <v-col cols="auto">
+              <v-list-item>
+                <v-list-item-title>Sign Out</v-list-item-title>
+                <v-list-item-subtitle> </v-list-item-subtitle>
+              </v-list-item>
+            </v-col>
+          </v-row>
+        </v-list-item>
+      </v-list>
     </v-navigation-drawer>
+
+    <v-app-bar app color="primary" dark dense clipped-left>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title>
+        <router-link to="/" class="white--text" style="text-decoration: none">
+          JobSherpa
+        </router-link>
+      </v-toolbar-title>
+      <v-spacer />
+      <v-divider class="px-3 py-1 mr-3" vertical />
+      <SettingsMenu />
+    </v-app-bar>
     <v-main>
       <router-view v-slot="{ Component }">
         <transition>
@@ -30,25 +65,15 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import router from "./router";
-const loginDialog = false;
+import SettingsMenu from "./components/SettingsMenu.vue";
 const drawer = ref(false);
-const items = [
+const sidebarLinks = [
   {
-    title: "Foo",
-    value: "foo",
-  },
-  {
-    title: "Bar",
-    value: "bar",
-  },
-  {
-    title: "Fizz",
-    value: "fizz",
-  },
-  {
-    title: "Buzz",
-    value: "buzz",
+    route: "/",
+    icon: "mdi-magnify",
+    name: "Home",
+    isVisible: true,
+    isDivider: false,
   },
 ];
 </script>
