@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto" max-width="500">
-    <v-toolbar flat color="red-lighten-1">
+    <v-toolbar flat color="primary">
       <v-btn icon="mdi-account"></v-btn>
 
       <v-toolbar-title class="font-weight-light">

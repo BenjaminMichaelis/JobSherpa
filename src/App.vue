@@ -123,5 +123,12 @@ const sidebarLinks = [
     isVisible: true,
     isDivider: false,
   },
+  {
+    route: "/settings",
+    icon: "mdi-account-cog",
+    name: "Settings",
+    isVisible: true,
+    isDivider: false,
+  },
 ];
 </script>
