@@ -29,7 +29,7 @@
 
     <v-card-text>
       <v-checkbox
-        v-for="(event, index) in job.events.slice(0, 2)"
+        v-for="(event, index) in job.events"
         v-bind:key="index"
         :label="event"
       ></v-checkbox>
@@ -37,10 +37,7 @@
     <v-divider class="mx-4 mb-1"></v-divider>
 
     <v-card-title>Recent Activity</v-card-title>
-    <v-card-text
-      v-for="activity in job.activities.slice(0, 2)"
-      v-bind:key="activity"
-    >
+    <v-card-text v-for="activity in job.activities" v-bind:key="activity">
       {{ activity }}
     </v-card-text>
     <router-link :to="{ name: 'job-details', params: { id: job.id } }">{{
