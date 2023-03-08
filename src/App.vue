@@ -45,13 +45,20 @@
     <v-app-bar app color="primary" dark dense clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>
-        <router-link to="/" class="white--text" style="text-decoration: none">
+        <router-link to="/" style="text-decoration: none">
           JobSherpa
         </router-link>
       </v-toolbar-title>
       <v-spacer />
       <v-divider class="px-3 py-1 mr-3" vertical />
-      <SettingsMenu />
+      <v-btn
+        @click="toggleTheme"
+        :icon="
+          theme.global.current.value.dark
+            ? 'mdi-weather-sunny'
+            : 'mdi-moon-waning-crescent'
+        "
+      ></v-btn>
     </v-app-bar>
     <v-main>
       <router-view v-slot="{ Component }">
@@ -64,8 +71,28 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import SettingsMenu from "./components/SettingsMenu.vue";
+import { useTheme } from "vuetify";
+import { DARK_THEME } from "@/lib/symbols";
+import { ref, onMounted } from "vue";
+onMounted(() => {
+  const storedTheme = localStorage.getItem(DARK_THEME);
+
+  if (storedTheme) {
+    if (storedTheme === "true") {
+      theme.global.name.value = "dark";
+    } else {
+      theme.global.name.value = "light";
+    }
+  } else
+    window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+});
+const theme = useTheme();
+
+function toggleTheme() {
+  theme.global.name.value = theme.global.current.value.dark ? "light" : "dark";
+  localStorage.setItem(DARK_THEME, theme.global.current.value.dark.toString());
+}
 const drawer = ref(false);
 const sidebarLinks = [
   {
