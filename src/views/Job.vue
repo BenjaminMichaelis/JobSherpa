@@ -10,7 +10,7 @@
 <script lang="ts">
 import JobPage from "@/components/JobPage.vue";
 import { JobList } from "@/api/jobs";
-import { Job } from "@/job";
+import { Job } from "@/models/job";
 export default {
   name: "Job",
   components: {

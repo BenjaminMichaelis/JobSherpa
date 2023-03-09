@@ -73,7 +73,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Job } from "@/job";
+import { Job } from "@/models/job";
 defineProps<{
   job: Job;
 }>();

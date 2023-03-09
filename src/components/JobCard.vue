@@ -1,5 +1,5 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12" max-width="374" link @click.stop="routeToProject(null, null)">
+  <v-card :loading="loading" class="mx-auto my-12" max-width="374" link :to="{ name: 'job-details', params: { id: job?.id } }">
     <v-card-item>
       <v-card-title>{{ job.name }}</v-card-title>
 
@@ -44,27 +44,13 @@
       {{ activity }}
     </v-card-text>
 
-    <v-row justify-center class="my-5">
-      <v-btn
-        :to="{ name: 'job-details', params: { id: job.id } }"
-        color="primary"
-        class="mx-5"
-      >
-        {{ "More details" }}
-      </v-btn>
-    </v-row>
   </v-card>
 </template>
 
 <script lang="ts" setup>
-import { Job } from "@/job";
-import router from "@/router/index";
+import { Job } from "@/models/job";
 defineProps({
   job: Job
 })
 const loading = false;
-
-function routeToProject(assignmentId: string | null, hash: string | null) {
-    router.push({ name: 'job-details', params: { id: job.id } });
-  }
 </script>
