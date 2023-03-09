@@ -1,6 +1,5 @@
 // Composables
 import { createRouter, createWebHistory } from "vue-router";
-import JobPage from "@/components/JobPage.vue";
 
 const routes = [
   {
@@ -26,7 +25,6 @@ const routes = [
   {
     path: "/job/:id",
     name: "job-details",
-    //component: JobPage,
     component: () => import("./views/Job.vue"),
     props: true,
   },
