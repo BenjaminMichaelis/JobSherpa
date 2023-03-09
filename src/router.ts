@@ -28,6 +28,11 @@ const routes = [
     component: () => import("./views/Job.vue"),
     props: true,
   },
+  {
+    path: "/about",
+    name: "about",
+    component: () => import("./views/About.vue"),
+  },
 ];
 
 const router = createRouter({

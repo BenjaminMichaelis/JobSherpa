@@ -1,5 +1,12 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib",
-    "editor.formatOnSave": true,
-    "cSpell.words": ["Vite", "unplugin", "iconsets", "viewmodels", "composables"]
-  }
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "composables",
+    "iconsets",
+    "unplugin",
+    "viewmodels",
+    "Vite",
+    "Vuetify"
+  ]
+}
