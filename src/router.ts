@@ -23,6 +23,12 @@ const routes = [
     component: () => import("./views/Settings.vue"),
   },
   {
+    path: "/job/:id",
+    name: "job-details",
+    component: () => import("./views/Job.vue"),
+    props: true,
+  },
+  {
     path: "/about",
     name: "about",
     component: () => import("./views/About.vue"),
