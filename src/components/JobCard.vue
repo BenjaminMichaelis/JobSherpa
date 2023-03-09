@@ -43,9 +43,16 @@
     >
       {{ activity }}
     </v-card-text>
-    <router-link :to="{ name: 'job-details', params: { id: job.id } }">{{
-      "More details"
-    }}</router-link>
+
+    <v-row justify-center class="my-5">
+      <v-btn
+        :to="{ name: 'job-details', params: { id: job.id } }"
+        color="primary"
+        class="mx-5"
+      >
+        {{ "More details" }}
+      </v-btn>
+    </v-row>
   </v-card>
 </template>
 

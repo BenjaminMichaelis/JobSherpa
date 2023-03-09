@@ -1,6 +1,4 @@
 import { Job } from "@/job";
-import http from "http";
-import url from "url";
 export { JobList };
 const JobList: Job[] = [
   new Job(
@@ -52,36 +50,3 @@ const JobList: Job[] = [
     ["Time Management", "Critical Thinking"]
   ),
 ];
-
-/*const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url || "", true);
-
-  if (parsedUrl.pathname === "/api/jobs" && req.method === "GET") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(JobList));
-  } else if (
-    parsedUrl.pathname &&
-    parsedUrl.pathname.startsWith("/api/jobs/") &&
-    req.method === "GET"
-  ) {
-    const jobId = parsedUrl.pathname.split("/")[3];
-    const job = JobList.find((job) => job.id === jobId);
-
-    if (job) {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(job));
-    } else {
-      res.writeHead(404, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: "Job not found" }));
-    }
-  } else {
-    res.writeHead(404, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ error: "API endpoint not found" }));
-  }
-});
-
-const port = 3000;
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-*/
