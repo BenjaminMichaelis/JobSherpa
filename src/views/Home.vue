@@ -17,7 +17,6 @@ import JobCard from "@/components/JobCard.vue";
 
 <script lang="ts">
 import { JobList } from "@/api/jobs";
-//import { Job } from "@/job";
 export default {
   name: "JobPage",
   data() {
