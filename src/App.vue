@@ -24,30 +24,15 @@
         </div>
 
         <v-divider />
-        <v-list-item>
-          <v-row class="align-center">
-            <v-col cols="2">
-              <v-list-item-action>
-                <v-icon>fas fa-sign-out</v-icon>
-              </v-list-item-action>
-            </v-col>
-            <v-col cols="auto">
-              <v-list-item>
-                <v-list-item-title>Sign Out</v-list-item-title>
-                <v-list-item-subtitle> </v-list-item-subtitle>
-              </v-list-item>
-            </v-col>
-          </v-row>
-        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar app color="primary" dark dense clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>
-        <router-link to="/" style="text-decoration: none">
+        <v-btn color="black" size="x-large" variant="plain" to="/">
           JobSherpa
-        </router-link>
+        </v-btn>
       </v-toolbar-title>
       <v-spacer />
       <v-divider class="px-3 py-1 mr-3" vertical />
@@ -67,6 +52,27 @@
         </transition>
       </router-view>
     </v-main>
+    <v-footer class="bg-grey-lighten-1">
+      <v-row justify="center" no-gutters>
+        <v-btn
+          v-for="link in footerLinks"
+          :key="link.name"
+          :href="link.uri"
+          :prepend-icon="link.icon"
+          stacked
+          variant="text"
+          color="white"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mx-2"
+          >{{ link.name }}</v-btn
+        >
+        <v-col class="text-center mt-4" cols="12">
+          <v-icon size="small" icon="mdi-copyright"></v-icon>
+          {{ new Date().getFullYear() }}
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
@@ -93,6 +99,18 @@ function toggleTheme() {
   theme.global.name.value = theme.global.current.value.dark ? "light" : "dark";
   localStorage.setItem(DARK_THEME, theme.global.current.value.dark.toString());
 }
+type Link = {
+  name: string;
+  uri: string;
+  icon: string;
+};
+const footerLinks: Link[] = [
+  {
+    name: "Github",
+    uri: "https://github.com/BenjaminMichaelis/JobSherpa",
+    icon: "mdi-github",
+  },
+];
 const drawer = ref(false);
 const sidebarLinks = [
   {
@@ -127,6 +145,13 @@ const sidebarLinks = [
     route: "/settings",
     icon: "mdi-account-cog",
     name: "Settings",
+    isVisible: true,
+    isDivider: false,
+  },
+  {
+    route: "/about",
+    icon: "mdi-information",
+    name: "About",
     isVisible: true,
     isDivider: false,
   },
