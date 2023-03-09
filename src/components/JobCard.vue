@@ -1,5 +1,5 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12" max-width="374">
+  <v-card :loading="loading" class="mx-auto my-12" max-width="374" link @click.stop="routeToProject(null, null)">
     <v-card-item>
       <v-card-title>{{ job.name }}</v-card-title>
 
@@ -58,8 +58,13 @@
 
 <script lang="ts" setup>
 import { Job } from "@/job";
-defineProps<{
-  job: Job;
-}>();
+import router from "@/router/index";
+defineProps({
+  job: Job
+})
 const loading = false;
+
+function routeToProject(assignmentId: string | null, hash: string | null) {
+    router.push({ name: 'job-details', params: { id: job.id } });
+  }
 </script>
