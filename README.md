@@ -1,4 +1,5 @@
 # JobSherpa
+
 A simple site for keeping track of the details of your job search
 
 ## Installation and Startup Steps
@@ -9,6 +10,7 @@ A simple site for keeping track of the details of your job search
 4. To launch the application, run `npm run dev` (Compiles and hot-reloads for development)
 
 ## Production
+
 To compile and minifies for production
 
 `npm run build`
