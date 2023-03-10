@@ -4,8 +4,13 @@ import { createRouter, createWebHistory } from "vue-router";
 const routeInfos = [
   {
     path: "/",
-    name: "home",
+    name: "userdashboard",
     component: () => import("../views/UserDashboard.vue"),
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: () => import("../views/Home.vue"),
   },
   {
     path: "/login",
