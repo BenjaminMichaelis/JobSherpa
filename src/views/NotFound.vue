@@ -2,7 +2,9 @@
   <span class="container404">
     <div class="logo404">404</div>
     <div class="wrong404">Oops! Something is wrong.</div>
-    <a class="button404" @click="$router.go(-1)"><i class="icon-home"></i> Go back to the previous page, it is better.</a>
+    <a class="button404" @click="$router.go(-1)"
+      ><i class="icon-home"></i> Go back to the previous page, it is better.</a
+    >
   </span>
 </template>
 

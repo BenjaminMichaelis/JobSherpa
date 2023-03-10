@@ -1,5 +1,11 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12" max-width="374" link :to="{ name: 'job-details', params: { id: job?.id } }">
+  <v-card
+    :loading="loading"
+    class="mx-auto my-12"
+    max-width="374"
+    link
+    :to="{ name: 'job-details', params: { id: job?.id } }"
+  >
     <v-card-item>
       <v-card-title>{{ job.name }}</v-card-title>
 
@@ -43,14 +49,13 @@
     >
       {{ activity }}
     </v-card-text>
-
   </v-card>
 </template>
 
 <script lang="ts" setup>
 import { Job } from "@/models/job";
 defineProps({
-  job: Job
-})
+  job: Job,
+});
 const loading = false;
 </script>
