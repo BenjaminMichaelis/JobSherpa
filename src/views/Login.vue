@@ -1,6 +1,9 @@
 <template>
   <div class="d-flex align-center justify-center" style="height: 100vh">
-    <v-sheet width="400" class="mx-auto">
+    <v-card width="400" class="mx-auto" border="none" variant="outlined">
+      <v-toolbar color="primary" dark>
+        <v-toolbar-title>Login</v-toolbar-title>
+      </v-toolbar>
       <v-form fast-fail @submit.prevent="login">
         <v-text-field
           variant="underlined"
@@ -45,7 +48,7 @@
           Don't already have an account? <a href="/register">Register</a>
         </p>
       </div>
-    </v-sheet>
+    </v-card>
   </div>
 </template>
 

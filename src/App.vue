@@ -114,8 +114,8 @@ const footerLinks: Link[] = [
 const drawer = ref(false);
 const sidebarLinks = [
   {
-    route: "/",
-    icon: "mdi-magnify",
+    route: "/home",
+    icon: "mdi-home",
     name: "Home",
     isVisible: true,
     isDivider: false,

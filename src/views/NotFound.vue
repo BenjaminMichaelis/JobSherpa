@@ -2,8 +2,9 @@
   <span class="container404">
     <div class="logo404">404</div>
     <div class="wrong404">Oops! Something is wrong.</div>
-    <a class="button404" @click="$router.go(-1)"
-      ><i class="icon-home"></i> Go back to the previous page, it is better.</a
+    <v-btn class="button404" @click="$router.go(-1)"
+      ><v-icon icon="mdi-arrow-left" /> Go back to the previous page, it is
+      better.</v-btn
     >
   </span>
 </template>
@@ -27,7 +28,6 @@
   font-size: 1.2em;
   text-decoration: none;
   border: 1px solid #efefef;
-  padding: 0.5em;
   border-radius: 3px;
   float: left;
   margin: 6em 0 0 -155px;
