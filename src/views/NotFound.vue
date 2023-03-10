@@ -1,9 +1,11 @@
 <template>
-  <h1>404</h1>
-  <p>Oops! Something is wrong.</p>
-  <a class="button" href="/"
-    ><i class="icon-home"></i> Go back to home page, it is better.</a
-  >
+  <span class="container404">
+    <div class="logo404">404</div>
+    <div class="wrong404">Oops! Something is wrong.</div>
+    <a class="button404" @click="$router.go(-1)"
+      ><i class="icon-home"></i> Go back to the previous page, it is better.</a
+    >
+  </span>
 </template>
 
 <style>
@@ -13,15 +15,14 @@
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500);
 
-body {
+.container404 {
   background-color: #007aff;
-  color: #fff;
   font-size: 100%;
   line-height: 1.5;
   font-family: "Roboto", sans-serif;
 }
 
-.button {
+.button404 {
   font-weight: 300;
   font-size: 1.2em;
   text-decoration: none;
@@ -35,18 +36,18 @@ body {
   transition: all 0.3s linear;
 }
 
-.button:hover {
+.button404:hover {
   background-color: #007aff;
   color: #fff;
 }
 
-p {
+.wrong404 {
   font-size: 2em;
   text-align: center;
   font-weight: 100;
 }
 
-h1 {
+.logo404 {
   text-align: center;
   font-size: 15em;
   font-weight: 100;
