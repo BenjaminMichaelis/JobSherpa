@@ -6,9 +6,10 @@
     link
     :to="{ name: 'job-details', params: { id: job?.id } }"
   >
+    <v-toolbar
+      ><v-toolbar-title>{{ job.name }}</v-toolbar-title></v-toolbar
+    >
     <v-card-item>
-      <v-card-title>{{ job.name }}</v-card-title>
-
       <v-card-subtitle>
         <span class="me-1">{{ job.company }}</span>
       </v-card-subtitle>
