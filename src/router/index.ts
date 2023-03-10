@@ -34,6 +34,11 @@ const routeInfos = [
     props: true,
   },
   {
+    path: "/timeline",
+    name: "timeline",
+    component: () => import("../views/TimelinePage.vue"),
+  },
+  {
     path: "/about",
     name: "about",
     component: () => import("../views/About.vue"),
