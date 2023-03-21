@@ -10,9 +10,10 @@
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-session": "^1.17.3",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.21",
+    "sequelize": "^6.29.3",
     "sqlite3": "^5.1.6"
   }
 }
