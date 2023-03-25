@@ -1,8 +1,8 @@
 const db = require("../models");
-const Wip = db.wips;
+const User = db.users;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Wip
+// Create and Save a new user
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.title) {
@@ -12,117 +12,115 @@ exports.create = (req, res) => {
       return;
     }
   
-    // Create a Wip
-    const wip = {
-      title: req.body.title,
-      description: req.body.description,
-      published: req.body.published ? req.body.published : false
+    // Create a user
+    const user = {
+      username: req.body.username,
+      password: req.body.password,
     };
   
-    // Save Wip in the database
-    Wip.create(wip)
+    // Save user in the database
+    User.create(user)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the Wip."
+            err.message || "Some error occurred while creating the user."
         });
       });
   };
 
-// Retrieve all Wips from the database.
+// Retrieve all users from the database.
 exports.findAll = (req, res) => {
     const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   
-    Wip.findAll({ where: condition })
+    User.findAll()
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving wips."
+            err.message || "Some error occurred while retrieving users."
         });
       });
   };
 
-// Find a single Wip with an id
+// Find a single user with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Wip.findByPk(id)
+    User.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
         } else {
           res.status(404).send({
-            message: `Cannot find Wip with id=${id}.`
+            message: `Cannot find user with id=${id}.`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Wip with id=" + id
+          message: "Error retrieving user with id=" + id
         });
       });
   };
 
-// Update a Wip by the id in the request
+// Update a user by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
   
-    Wip.update(req.body, {
+    User.update(req.body, {
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Wip was updated successfully."
+            message: "user was updated successfully."
           });
         } else {
           res.send({
-            message: `Cannot update Wip with id=${id}. Maybe Wip was not found or req.body is empty!`
+            message: `Cannot update user with id=${id}. Maybe user was not found or req.body is empty!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating Wip with id=" + id
+          message: "Error updating user with id=" + id
         });
       });
   };
 
-// Delete a Wip with the specified id in the request
+// Delete a user with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    Wip.destroy({
+    User.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Wip was deleted successfully!"
+            message: "user was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Wip with id=${id}. Maybe Wip was not found!`
+            message: `Cannot delete user with id=${id}. Maybe user was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Wip with id=" + id
+          message: "Could not delete user with id=" + id
         });
       });
   };
 
-// Delete all Wips from the database.
+// Delete all users from the database.
 exports.deleteAll = (req, res) => {
-    Wip.destroy({
+    User.destroy({
       where: {},
       truncate: false
     })
@@ -133,20 +131,6 @@ exports.deleteAll = (req, res) => {
         res.status(500).send({
           message:
             err.message || "Some error occurred while removing all wips."
-        });
-      });
-  };
-
-// Find all published Wips
-exports.findAllPublished = (req, res) => {
-    Wip.findAll({ where: { published: true } })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving wips."
         });
       });
   };

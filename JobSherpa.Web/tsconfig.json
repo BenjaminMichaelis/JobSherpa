@@ -28,7 +28,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/services/UserDataService.ts" ],
   "references": [
     {
       "path": "./tsconfig.node.json"

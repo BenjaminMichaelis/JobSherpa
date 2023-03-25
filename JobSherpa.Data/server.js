@@ -21,24 +21,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./backend/models");
 
 // If in development
-if(app.get('env') === 'development')
-{
+if (app.get('env') === 'development') {
     // Drop existing tables and re-sync database
     db.sequelize.sync({ force: true }).then(() => {
         console.log("Drop and re-sync db.");
     });
 }
-else{
+else {
     // Sync database
     db.sequelize.sync();
 }
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to JobSherpa" });
+    res.json({ message: "Welcome to JobSherpa!" });
 });
 
-require("./backend/routes/wip.routes")(app);
+require("./backend/routes/user.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
