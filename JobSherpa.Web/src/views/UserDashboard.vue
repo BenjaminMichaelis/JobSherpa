@@ -16,21 +16,24 @@
 <script lang="ts" setup>
 import JobCard from "@/components/JobCard.vue";
 import UserDataService from "@/services/UserDataService";
-import { onBeforeMount } from 'vue'
+import { onMounted } from 'vue'
+
 var users;
 async function GetUsers() {
   debugger;
-  users = await UserDataService.getAll();
+  users = await (await UserDataService.getAll()).data;
 }
+
+onMounted(async () => {
+  console.log(`the component is now mounted.`);
+  await GetUsers();
+  console.log('finish await');
+})
 </script>
 
 <script lang="ts">
 import { JobList } from "@/api/jobs";
 export default {
-  async created() {
-    debugger;
-    await GetUsers();
-  },
   name: "JobPage",
   data() {
     return {

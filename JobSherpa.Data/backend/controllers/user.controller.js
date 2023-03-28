@@ -33,8 +33,6 @@ exports.create = (req, res) => {
 
 // Retrieve all users from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-  
     User.findAll()
       .then(data => {
         res.send(data);
