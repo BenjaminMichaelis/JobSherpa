@@ -31,7 +31,14 @@ jobs:
         cache: 'npm'
         cache-dependency-path: package-lock.json
 
-    - run: npm ci
-    - run: npm run build
-    # - run: npm test
-    - run: npm run lint
+    - name: Build and test lint for Web Project
+      run: |
+        cd JobSherpa.Web
+        npm ci
+        npm run build
+        npm run lint
+
+    - name: Build and test Data Project
+      run: |
+        cd JobSherpa.Data
+        npm ci
