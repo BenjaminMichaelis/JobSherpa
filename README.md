@@ -19,7 +19,7 @@ To run frontend development:
 To run backend server:
 
 - Navigate to Data Project (`cd JobSherpa.Data`)
-- Run server with `node server.js` command
+- Run server with `npm run start` command
 
 The server should then be available locally at <http://localhost:8080/>
 
