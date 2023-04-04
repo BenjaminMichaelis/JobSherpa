@@ -8,7 +8,7 @@ class User {
     username: string,
     password: string,
     createdAt: string,
-    updatedAt: string,
+    updatedAt: string
   ) {
     this.username = username;
     this.password = password;
