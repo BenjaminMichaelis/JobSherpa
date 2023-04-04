@@ -9,10 +9,23 @@ A simple site for keeping track of the details of your job search
 3. Navigate to the project locally, and open up your terminal and run `npm install`
 4. To launch the application, run `npm run dev` (Compiles and hot-reloads for development)
 
+## Development
+
+To run frontend development:
+
+- Navigate to Web Project (`cd JobSherpa.Web`)
+- Run  frontend with `npm run dev` command
+
+To run backend server:
+
+- Navigate to Data Project (`cd JobSherpa.Data`)
+- Run server with `npm run start` command
+
+The server should then be available locally at <http://localhost:8080/>
+
 ## Production
 
-To compile and minifies for production
-
+To compile and minifies for production:
 `npm run build`
 
 ## Lints and fixes files

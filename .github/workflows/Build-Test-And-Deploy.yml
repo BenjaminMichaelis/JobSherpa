@@ -24,14 +24,28 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }} with caching
+    - name: Use Node.js for Web Project ${{ matrix.node-version }} with caching
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: package-lock.json
+        cache-dependency-path: JobSherpa.Web/package-lock.json
+        
+    - name: Use Node.js for Data Project ${{ matrix.node-version }} with caching
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: JobSherpa.Data/package-lock.json
 
-    - run: npm ci
-    - run: npm run build
-    # - run: npm test
-    - run: npm run lint
+    - name: Build and test lint for Web Project
+      run: |
+        cd JobSherpa.Web
+        npm ci
+        npm run build
+        npm run lint
+
+    - name: Build and test Data Project
+      run: |
+        cd JobSherpa.Data
+        npm ci
