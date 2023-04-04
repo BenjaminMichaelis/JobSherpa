@@ -12,10 +12,14 @@ A simple site for keeping track of the details of your job search
 ## Development
 
 To run frontend development:
-`npm run dev`
+
+- Navigate to Web Project (`cd JobSherpa.Web`)
+- Run  frontend with `npm run dev` command
 
 To run backend server:
-`node server.js`
+
+- Navigate to Data Project (`cd JobSherpa.Data`)
+- Run server with `node server.js` command
 
 The server should then be available locally at <http://localhost:8080/>
 
