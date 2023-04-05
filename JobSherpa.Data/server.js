@@ -22,12 +22,12 @@ const db = require("./backend/models");
 
 // If in development
 if (app.get('env') === 'development') {
-//     // Drop existing tables and re-sync database
-//     db.sequelize.sync({ force: true }).then(() => {
-//         console.log("Drop and re-sync db.");
-//     });
-// }
-// else {
+    // Drop existing tables and re-sync database
+    db.sequelize.sync({ force: true }).then(() => {
+        console.log("Drop and re-sync db.");
+    });
+}
+else {
     // Sync database
     db.sequelize.sync();
 }

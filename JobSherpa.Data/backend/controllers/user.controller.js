@@ -123,12 +123,12 @@ exports.deleteAll = (req, res) => {
       truncate: false
     })
       .then(nums => {
-        res.send({ message: `${nums} Wips were deleted successfully!` });
+        res.send({ message: `${nums} Users were deleted successfully!` });
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all wips."
+            err.message || "Some error occurred while removing all Users."
         });
       });
   };
