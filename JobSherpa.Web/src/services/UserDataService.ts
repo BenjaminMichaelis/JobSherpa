@@ -24,6 +24,24 @@ class UserDataService {
   deleteAll() {
     return http.delete(`/users`);
   }
+
+  login(username: string, password: string) {
+    return http.post("/users/login", { username, password });
+  }
+
+  register(name: string, email: string, username: string, password: string) {
+    const createdAt = new Date().toISOString();
+    const updatedAt = createdAt;
+
+    return http.post("/users/register", {
+      name,
+      email,
+      username,
+      password,
+      createdAt,
+      updatedAt,
+    });
+  }
 }
 
 export default new UserDataService();
