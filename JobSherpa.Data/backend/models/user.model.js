@@ -3,10 +3,27 @@ module.exports = (sequelize, Sequelize) => {
     username: {
       type: Sequelize.STRING,
       primaryKey: true,
-      unique: true
+      unique: true,
     },
     password: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+    },
+    name: {
+      type: Sequelize.STRING,
+    },
+    email: {
+      type: Sequelize.STRING,
+      unique: true,
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
     },
   });
 

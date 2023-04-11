@@ -4,7 +4,7 @@
       <v-toolbar color="primary" dark>
         <v-toolbar-title>Login</v-toolbar-title>
       </v-toolbar>
-      <v-form fast-fail @submit.prevent="login">
+      <v-form @submit.prevent="login">
         <v-text-field
           variant="underlined"
           v-model="state.username"
@@ -31,17 +31,18 @@
           color="primary"
           block
           class="mt-2"
-          @click="v$.$validate"
-          >Login</v-btn
         >
+          Login
+        </v-btn>
         <v-btn
           variant="outlined"
           color="primary"
           class="mt-2"
           block
           @click="clear"
-          >Clear</v-btn
         >
+          Clear
+        </v-btn>
       </v-form>
       <div class="mt-2">
         <p class="text-body-2">
@@ -56,10 +57,21 @@
 import { reactive } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+import UserDataService from "@/services/UserDataService";
 
-const initialState = {
+type StateType = {
+  username: string;
+  password: string;
+  isFormValid: boolean;
+  [key: string]: string | boolean;
+};
+
+const initialState: StateType = {
   username: "",
   password: "",
+  isFormValid: false,
 };
 
 const rules = {
@@ -72,6 +84,8 @@ const state = reactive({
 });
 
 const v$ = useVuelidate(rules, state);
+const router = useRouter();
+const store = useStore();
 
 function clear() {
   v$.value.$reset();
@@ -81,10 +95,25 @@ function clear() {
   }
 }
 
-function login() {
-  // Just placeholder code, should be removed
+async function login() {
   if (v$.value.$invalid) {
+    console.log("error, not valid");
     return;
+  }
+
+  try {
+    console.log("made it here");
+    const response = await UserDataService.login(
+      state.username,
+      state.password
+    );
+    console.log(response.data);
+    store.dispatch("setUser", response.data);
+    router.push({ name: "userdashboard" });
+    // Save the user object to a Vuex store or localStorage and navigate to the desired page
+  } catch (error) {
+    console.error(error);
+    // Show an error message
   }
 }
 </script>

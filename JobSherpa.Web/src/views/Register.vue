@@ -74,6 +74,8 @@
 import { reactive } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { email, required } from "@vuelidate/validators";
+import { useRouter } from "vue-router";
+import UserDataService from "@/services/UserDataService";
 
 const initialState = {
   name: "",
@@ -94,6 +96,7 @@ const state = reactive({
 });
 
 const v$ = useVuelidate(rules, state);
+const router = useRouter();
 
 function clear() {
   v$.value.$reset();
@@ -103,10 +106,25 @@ function clear() {
   }
 }
 
-function register() {
-  // Just placeholder code, should be removed
+async function register() {
   if (v$.value.$invalid) {
     return;
+  }
+
+  try {
+    console.log("made it here!");
+    const response = await UserDataService.register(
+      state.name,
+      state.email,
+      state.username,
+      state.password
+    );
+    console.log(response.data);
+    router.push({ name: "login" });
+    // Navigate to the login page or desired page after successful registration
+  } catch (error) {
+    console.error(error);
+    // Show an error message
   }
 }
 </script>
