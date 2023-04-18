@@ -19,54 +19,29 @@
     </v-toolbar>
 
     <v-card-text>
-      <v-form fast-fail @submit.prevent>
+      <v-form fast-fail ref="form" @submit.prevent v-model="formValid">
         <v-text-field
           :disabled="!isEditing"
-          v-model="firstName"
+          v-model="user.name"
           color="white"
-          label="First Name"
+          label="Name"
           :rules="NameRules"
         ></v-text-field>
-      </v-form>
-
-      <v-form fast-fail @submit.prevent>
         <v-text-field
           :disabled="!isEditing"
-          v-model="lastName"
+          v-model="user.email"
           color="white"
-          label="Last Name"
-          :rules="NameRules"
+          label="Email"
+          :rules="EmailRules"
         ></v-text-field>
-      </v-form>
-
-      <v-form fast-fail @submit.prevent>
         <v-text-field
           :disabled="!isEditing"
-          v-model="password"
+          v-model="user.password"
           color="white"
           label="Password"
           :rules="PasswordRules"
         ></v-text-field>
       </v-form>
-
-      <v-text-field
-        :disabled="!isEditing"
-        v-model="email"
-        color="white"
-        label="Email"
-        :rules="EmailRules"
-      ></v-text-field>
-
-      <v-autocomplete
-        :disabled="!isEditing"
-        :items="states"
-        :custom-filter="customFilter"
-        v-model="state"
-        color="white"
-        item-title="name"
-        item-value="abbr"
-        label="State"
-      ></v-autocomplete>
     </v-card-text>
 
     <v-divider></v-divider>
@@ -74,7 +49,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
 
-      <v-btn :disabled="!isEditing" @click="save"> Save </v-btn>
+      <v-btn :disabled="!isEditing || !formValid" @click="save"> Save </v-btn>
     </v-card-actions>
 
     <v-snackbar
@@ -90,23 +65,14 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+import UserDataService from "@/services/UserDataService";
+
 export default {
   data: () => ({
     hasSaved: false,
     isEditing: null,
-    model: null,
-    states: [
-      { name: "Florida", abbr: "FL", id: 1 },
-      { name: "Georgia", abbr: "GA", id: 2 },
-      { name: "Nebraska", abbr: "NE", id: 3 },
-      { name: "California", abbr: "CA", id: 4 },
-      { name: "New York", abbr: "NY", id: 5 },
-    ],
-    firstName: "Current First Name Goes Here",
-    lastName: "Current Last Name Goes Here",
-    state: "Current State Goes Here",
-    email: "Current Email Goes Here",
-    password: "*******",
+    formValid: false,
     NameRules: [
       (value) => {
         if (value?.length > 3) {
@@ -131,19 +97,46 @@ export default {
     ],
   }),
 
-  methods: {
-    customFilter(item, queryText, itemText) {
-      const textOne = item.name.toLowerCase();
-      const textTwo = item.abbr.toLowerCase();
-      const searchText = queryText.toLowerCase();
-
+  computed: {
+    ...mapGetters(["user"]),
+    formIsValid() {
+      if (!this.$refs.form) return false;
       return (
-        textOne.indexOf(searchText) > -1 || textTwo.indexOf(searchText) > -1
+        this.NameRules.every((rule) => rule(this.user.name)) &&
+        this.PasswordRules.every((rule) => rule(this.user.password)) &&
+        this.EmailRules.every((rule) => rule(this.user.email))
       );
     },
-    save() {
+  },
+
+  async created() {
+    await this.loadUserProfile(this.user.username);
+  },
+
+  methods: {
+    ...mapActions(["setUser"]),
+
+    async loadUserProfile(userId) {
+      try {
+        const response = await UserDataService.get(userId);
+        this.setUser(response.data);
+      } catch (error) {
+        console.error("Error loading user profile:", error);
+      }
+    },
+
+    async save() {
+      await this.updateUserProfile(this.user.username, this.user);
       this.isEditing = !this.isEditing;
       this.hasSaved = true;
+    },
+
+    async updateUserProfile(userId, userData) {
+      try {
+        await UserDataService.update(userId, userData);
+      } catch (error) {
+        console.error("Error updating user profile:", error);
+      }
     },
   },
 };

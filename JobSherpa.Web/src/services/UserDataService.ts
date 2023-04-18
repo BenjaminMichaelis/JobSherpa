@@ -42,6 +42,10 @@ class UserDataService {
       updatedAt,
     });
   }
+
+  getUserProfile(id: string) {
+    return http.get(`/users/profile/${id}`);
+  }
 }
 
 export default new UserDataService();
