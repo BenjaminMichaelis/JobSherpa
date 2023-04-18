@@ -106,11 +106,13 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
+
   const { password, name, email } = req.body;
   const updateData = { password, name, email };
 
   User.update(updateData, {
     where: { username: id },
+
   })
     .then((num) => {
       if (num == 1) {
