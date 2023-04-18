@@ -80,6 +80,8 @@
 import { useTheme } from "vuetify";
 import { DARK_THEME } from "@/lib/symbols";
 import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
 onMounted(() => {
   const storedTheme = localStorage.getItem(DARK_THEME);
 
@@ -94,6 +96,10 @@ onMounted(() => {
       window.matchMedia("(prefers-color-scheme: dark)").matches;
 });
 const theme = useTheme();
+
+const store = useStore();
+
+const isAuthenticated = computed(() => store.getters.isAuthenticated);
 
 function toggleTheme() {
   theme.global.name.value = theme.global.current.value.dark ? "light" : "dark";
@@ -112,48 +118,66 @@ const footerLinks: Link[] = [
   },
 ];
 const drawer = ref(false);
-const sidebarLinks = [
-  {
-    route: "/home",
-    icon: "mdi-home",
-    name: "Home",
-    isVisible: true,
-    isDivider: false,
-  },
-  {
-    route: "",
-    icon: "",
-    name: "",
-    isVisible: true,
-    isDivider: true,
-  },
-  {
-    route: "/login",
-    icon: "mdi-login",
-    name: "Login",
-    isVisible: true,
-    isDivider: false,
-  },
-  {
-    route: "/register",
-    icon: "mdi-account-plus",
-    name: "Register",
-    isVisible: true,
-    isDivider: false,
-  },
-  {
-    route: "/settings",
-    icon: "mdi-account-cog",
-    name: "Settings",
-    isVisible: true,
-    isDivider: false,
-  },
-  {
-    route: "/about",
-    icon: "mdi-information",
-    name: "About",
-    isVisible: true,
-    isDivider: false,
-  },
-];
+const sidebarLinks = computed(() => {
+  const links = [
+    {
+      route: "/",
+      icon: "mdi-home",
+      name: "Home",
+      isVisible: true,
+      isDivider: false,
+    },
+    {
+      route: "/dashboard",
+      icon: "mdi-view-dashboard-variant",
+      name: "Dashboard",
+      isVisible: true,
+      isDivider: false,
+    },
+    {
+      route: "",
+      icon: "",
+      name: "",
+      isVisible: true,
+      isDivider: true,
+    },
+    {
+      route: "/login",
+      icon: "mdi-login",
+      name: "Login",
+      isVisible: !isAuthenticated.value,
+      isDivider: false,
+    },
+    {
+      route: "/logout",
+      icon: "mdi-logout",
+      name: "Logout",
+      isVisible: isAuthenticated.value,
+      isDivider: false,
+    },
+    {
+      route: "/register",
+      icon: "mdi-account-plus",
+      name: "Register",
+      isVisible: true,
+      isDivider: false,
+    },
+    {
+      route: "/settings",
+      icon: "mdi-account-cog",
+      name: "Settings",
+      isVisible: true,
+      isDivider: false,
+    },
+    {
+      route: "/about",
+      icon: "mdi-information",
+      name: "About",
+      isVisible: true,
+      isDivider: false,
+    },
+  ];
+
+  return links.filter((link) => link.isVisible);
+});
 </script>
