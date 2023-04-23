@@ -7,10 +7,14 @@ module.exports = (app) => {
   router.post("/", users.create);
 
   // Retrieve all users
-  router.get("/", users.findAll);
+  router.get("/", function (req, res) {
+    users.findAll(req, res);
+  });
 
   // Retrieve a single user with id
-  router.get("/:id", users.findOne);
+  router.get("/:id", function (req, res) {
+    users.findOne(req, res);
+  });
 
   // Update a user with id
   router.put("/:id", users.update);
@@ -26,6 +30,9 @@ module.exports = (app) => {
 
   // Register
   router.post("/register", users.register);
+
+  // Retrieve a user's job list with id
+  router.get("/:id/jobs", users.getUserJobs);
 
   app.use("/api/users", router);
 };

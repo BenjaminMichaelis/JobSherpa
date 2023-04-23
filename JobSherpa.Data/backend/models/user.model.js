@@ -26,6 +26,9 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: Sequelize.NOW,
     },
   });
+  User.associate = (models) => {
+    User.hasMany(models.job, { foreignKey: "userId" });
+  };
 
   return User;
 };

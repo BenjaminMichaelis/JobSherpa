@@ -170,3 +170,40 @@ exports.deleteAll = (req, res) => {
       });
     });
 };
+
+exports.getUserJobs = (req, res) => {
+  const username = req.params.id;
+
+  User.findOne({
+    where: { username },
+    include: [
+      {
+        model: db.job,
+        as: "jobs",
+        include: [
+          {
+            model: db.skill,
+            as: "skills",
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+      },
+    ],
+  })
+    .then((user) => {
+      if (user) {
+        res.send(user.jobs);
+      } else {
+        res.status(404).send({
+          message: `Cannot find user with username=${username}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving user with username=" + username,
+      });
+    });
+};

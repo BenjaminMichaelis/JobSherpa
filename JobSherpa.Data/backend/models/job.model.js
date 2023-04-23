@@ -1,27 +1,53 @@
 module.exports = (sequelize, Sequelize) => {
-    const Job = sequelize.define("job", {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        unique: true
-      },
-      jobtitle: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      company: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      salary: {
-        type: Sequelize.DECIMAL,
-        allowNull: true,
-      },
-    });
+  const Skill = require("./skill.model.js")(sequelize, Sequelize);
 
-    return Job;
-  };
+  const Job = sequelize.define("job", {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true,
+    },
+    userId: {
+      type: Sequelize.STRING,
+      references: {
+        model: "users", // This should be the table name for the User model
+        key: "username",
+      },
+    },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    company: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    desc: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    location: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    events: {
+      type: Sequelize.JSON,
+      allowNull: true,
+    },
+    activities: {
+      type: Sequelize.JSON,
+      allowNull: true,
+    },
+    position: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    salary: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+  });
+
+  return Job;
+};

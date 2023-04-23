@@ -1,4 +1,18 @@
 import http from "../http-common";
+import { Job } from "@/models/job";
+
+interface JobData {
+  id?: string;
+  name: string;
+  company: string;
+  desc: string;
+  location: string;
+  events: string[];
+  activities: string[];
+  position: string;
+  salary: string;
+  skills: string[];
+}
 
 class UserDataService {
   getAll() {
@@ -45,6 +59,16 @@ class UserDataService {
 
   getUserProfile(id: string) {
     return http.get(`/users/profile/${id}`);
+  }
+
+  getUserJobs(username: string) {
+    return http
+      .get(`/users/${username}/jobs`)
+      .then((response) => response.data);
+  }
+
+  createJob(data: JobData) {
+    return http.post("/jobs", data);
   }
 }
 
