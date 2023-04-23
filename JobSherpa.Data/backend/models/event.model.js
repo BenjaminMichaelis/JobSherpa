@@ -1,16 +1,20 @@
-module.exports = (sequelize, DataTypes) => {
-  const Event = sequelize.define("event", {
+module.exports = (sequelize, Sequelize) => {
+  const JobEvent = sequelize.define("jobevent", {
     id: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       primaryKey: true,
+      unique: true,
       autoIncrement: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     date: {
-      type: DataTypes.DATE,
+      type: Sequelize.DATE,
+      allowNull: false,
     },
   });
-  return Event;
+
+  return JobEvent;
 };
