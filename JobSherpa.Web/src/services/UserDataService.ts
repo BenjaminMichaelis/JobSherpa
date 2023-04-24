@@ -70,6 +70,9 @@ class UserDataService {
   createJob(data: JobData) {
     return http.post("/jobs", data);
   }
+  getJobById(jobId: string) {
+    return http.get(`/jobs/${jobId}`).then((response) => response.data);
+  }
 }
 
 export default new UserDataService();

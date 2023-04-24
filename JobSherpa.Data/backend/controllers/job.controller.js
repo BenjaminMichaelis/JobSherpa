@@ -52,6 +52,7 @@ exports.create = async (req, res) => {
     activities: req.body.activities,
     position: req.body.position,
     salary: req.body.salary,
+    jobDate: req.body.jobDate,
     userId: req.body.userId,
   };
 
@@ -93,4 +94,18 @@ exports.create = async (req, res) => {
       message: err.message || "Some error occurred while creating the job.",
     });
   }
+};
+exports.deleteAll = (req, res) => {
+  Job.destroy({
+    where: {},
+    truncate: false,
+  })
+    .then((nums) => {
+      res.send({ message: `${nums} Jobs were deleted successfully!` });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while removing all Jobs.",
+      });
+    });
 };

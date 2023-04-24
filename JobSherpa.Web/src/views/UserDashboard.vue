@@ -1,10 +1,19 @@
 <template>
   <v-container class="pa-10">
     <v-row>
-      <h1>Welcome {{ loggedInUserName }}</h1>
-      <v-btn color="primary" class="ml-3" @click="showNewJobForm = true"
-        >Add New Job</v-btn
-      >
+      <v-col>
+        <h1>Welcome {{ loggedInUserName }}</h1>
+      </v-col>
+      <v-col>
+        <v-spacer></v-spacer>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-btn color="primary" @click="showNewJobForm = true"
+          >Add New Job</v-btn
+        >
+      </v-col>
     </v-row>
     <v-row>
       <NewJobForm v-model="showNewJobForm" :userId="store.state.user.id" />

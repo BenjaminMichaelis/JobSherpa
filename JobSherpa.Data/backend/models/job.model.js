@@ -47,6 +47,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: true,
     },
+    jobDate: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
   });
 
   return Job;

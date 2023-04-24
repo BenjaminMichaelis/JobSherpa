@@ -60,14 +60,20 @@
             <v-col cols="12" sm="6" md="4">
               <v-textarea v-model="job.skills" label="Skills"></v-textarea>
             </v-col>
+            <v-col cols="12">
+              <v-row align="center">
+                <v-spacer></v-spacer>
+                <v-col cols="12" sm="6" md="4">
+                  <input v-model="job.jobDate" type="date" label="Job Date" />
+                </v-col>
+                <v-spacer></v-spacer>
+              </v-row>
+            </v-col>
           </v-row>
         </v-container>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="dialog = false">
-          Cancel
-        </v-btn>
         <v-btn color="blue darken-1" text @click="submitJob">Save</v-btn>
       </v-card-actions>
     </v-card>
@@ -92,6 +98,7 @@ const job = ref({
   position: "",
   salary: "",
   skills: "",
+  jobDate: "",
 });
 
 const user = computed(() => {
@@ -112,6 +119,7 @@ async function submitJob() {
     !job.value.position ||
     !job.value.salary ||
     !job.value.skills ||
+    !job.value.jobDate ||
     job.value.skills.length == 0
   ) {
     alert("Please fill in all required fields.");
@@ -135,6 +143,7 @@ async function submitJob() {
       position: job.value.position,
       salary: job.value.salary,
       skills: splitInput(job.value.skills),
+      jobDate: job.value.jobDate,
       userId,
     };
     console.log(job.value);

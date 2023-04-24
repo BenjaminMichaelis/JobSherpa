@@ -34,7 +34,7 @@
             <span class="text-subtitle-1">Skills:</span>
             <v-chip-group class="justify-center">
               <v-chip v-for="(skill, index) in job.skills" :key="index">
-                {{ skill }}
+                {{ skill.name }}
               </v-chip>
             </v-chip-group>
           </div>

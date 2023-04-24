@@ -207,3 +207,52 @@ exports.getUserJobs = (req, res) => {
       });
     });
 };
+exports.getJobById = (req, res) => {
+  const id = req.params.jobId;
+
+  Job.findByPk(id)
+    .then((job) => {
+      if (job) {
+        res.send(job);
+      } else {
+        res.status(404).send({
+          message: `Cannot find job with id=${id}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving job with id=" + id,
+      });
+    });
+};
+exports.getJobById = (req, res) => {
+  const jobId = req.params.jobId;
+
+  db.job
+    .findByPk(jobId, {
+      include: [
+        {
+          model: db.skill,
+          as: "skills",
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    })
+    .then((job) => {
+      if (job) {
+        res.send(job);
+      } else {
+        res.status(404).send({
+          message: `Cannot find job with id=${jobId}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving job with id=" + jobId,
+      });
+    });
+};
