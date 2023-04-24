@@ -11,6 +11,8 @@ module.exports = (app) => {
     jobs.findAllByUserId(req, res);
   });
 
+  router.delete("/:id", jobs.deleteById);
+
   // Other routes can be added here in the future
 
   app.use("/api/jobs", router);

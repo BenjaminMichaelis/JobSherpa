@@ -1,6 +1,6 @@
 <template>
   <div v-if="jobs">
-    <JobPage :job="jobs[0]" />
+    <JobPage :job="jobs[val - 1]" />
   </div>
   <div v-else>
     <p>Loading...</p>
@@ -27,6 +27,7 @@ if (store.state.user) {
 const users = ref(null);
 const jobs = ref(null);
 const currJob = ref(null);
+const val = Number(route.params.id);
 
 async function GetUsers() {
   const data = (await UserDataService.getAll()).data;

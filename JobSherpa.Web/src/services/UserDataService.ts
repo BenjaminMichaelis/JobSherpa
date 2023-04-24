@@ -73,6 +73,9 @@ class UserDataService {
   getJobById(jobId: string) {
     return http.get(`/jobs/${jobId}`).then((response) => response.data);
   }
+  deleteById(jobId: string) {
+    return http.delete(`jobs/${jobId}`);
+  }
 }
 
 export default new UserDataService();
