@@ -34,7 +34,7 @@
             <span class="text-subtitle-1">Skills:</span>
             <v-chip-group class="justify-center">
               <v-chip v-for="(skill, index) in job.skills" :key="index">
-                {{ skill }}
+                {{ skill.name }}
               </v-chip>
             </v-chip-group>
           </div>
@@ -67,6 +67,9 @@
         <v-card-text v-for="activity in job.activities" v-bind:key="activity">
           {{ activity }}
         </v-card-text>
+        <v-btn icon @click="deleteJob">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
       </v-container>
     </v-card>
   </v-container>
@@ -74,8 +77,26 @@
 
 <script lang="ts" setup>
 import { Job } from "@/models/job";
+import UserDataService from "@/services/UserDataService";
+import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
+const route = useRoute();
+const val = Number(route.params.id);
 defineProps<{
   job: Job;
 }>();
 const loading = false;
+const router = useRouter();
+
+async function deleteJob() {
+  const confirmed = window.confirm("Are you sure you want to delete this job?");
+  if (confirmed) {
+    try {
+      await UserDataService.deleteById(val.toString());
+      router.push({ name: "userdashboard" });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
 </script>

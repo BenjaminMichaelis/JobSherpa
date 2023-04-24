@@ -1,10 +1,25 @@
 <template>
   <v-container class="pa-10">
     <v-row>
-      <h1>Welcome {{ loggedInUserName }}</h1>
+      <v-col>
+        <h1>Welcome {{ loggedInUserName }}</h1>
+      </v-col>
+      <v-col>
+        <v-spacer></v-spacer>
+      </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="job in jobList" :key="job.id" cols="2" lg="3">
+      <v-col>
+        <v-btn color="primary" @click="showNewJobForm = true"
+          >Add New Job</v-btn
+        >
+      </v-col>
+    </v-row>
+    <v-row>
+      <NewJobForm v-model="showNewJobForm" :userId="store.state.user.id" />
+    </v-row>
+    <v-row>
+      <v-col v-for="job in jobs" :key="job.id" cols="2" lg="3">
         <JobCard :job="job" />
       </v-col>
     </v-row>
@@ -13,9 +28,11 @@
 
 <script lang="ts" setup>
 import JobCard from "@/components/JobCard.vue";
+import NewJobForm from "@/components/NewJobForm.vue";
 import UserDataService from "@/services/UserDataService";
-import { ref } from "vue";
+import { Ref, ref, computed, watchEffect, onMounted } from "vue";
 import { useStore } from "vuex";
+import { Job } from "@/models/job"; // Import Job model
 
 const store = useStore();
 
@@ -31,20 +48,24 @@ async function GetUsers() {
   users.value = data;
 }
 
+const jobs = ref(null);
+
+const showNewJobForm = ref(false);
+
+async function getJobs() {
+  try {
+    const jobsData = await UserDataService.getUserJobs(
+      store.state.user.username
+    );
+    console.log("jobsData:", jobsData);
+    jobs.value = jobsData;
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
+  }
+}
+
 (async function onMounted() {
   GetUsers();
+  getJobs();
 })();
-</script>
-
-<script lang="ts">
-import { JobList } from "@/api/jobs";
-import { list } from "postcss";
-export default {
-  name: "JobPage",
-  data() {
-    return {
-      jobList: JobList,
-    };
-  },
-};
 </script>

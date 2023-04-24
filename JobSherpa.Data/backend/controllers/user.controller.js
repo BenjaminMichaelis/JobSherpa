@@ -170,3 +170,90 @@ exports.deleteAll = (req, res) => {
       });
     });
 };
+
+exports.getUserJobs = (req, res) => {
+  const username = req.params.id;
+
+  User.findOne({
+    where: { username },
+    include: [
+      {
+        model: db.job,
+        as: "jobs",
+        include: [
+          {
+            model: db.skill,
+            as: "skills",
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+      },
+    ],
+  })
+    .then((user) => {
+      if (user) {
+        res.send(user.jobs);
+      } else {
+        res.status(404).send({
+          message: `Cannot find user with username=${username}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving user with username=" + username,
+      });
+    });
+};
+exports.getJobById = (req, res) => {
+  const id = req.params.jobId;
+
+  Job.findByPk(id)
+    .then((job) => {
+      if (job) {
+        res.send(job);
+      } else {
+        res.status(404).send({
+          message: `Cannot find job with id=${id}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving job with id=" + id,
+      });
+    });
+};
+exports.getJobById = (req, res) => {
+  const jobId = req.params.jobId;
+
+  db.job
+    .findByPk(jobId, {
+      include: [
+        {
+          model: db.skill,
+          as: "skills",
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    })
+    .then((job) => {
+      if (job) {
+        res.send(job);
+      } else {
+        res.status(404).send({
+          message: `Cannot find job with id=${jobId}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving job with id=" + jobId,
+      });
+    });
+};
+

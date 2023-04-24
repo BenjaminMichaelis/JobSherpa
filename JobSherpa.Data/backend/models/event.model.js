@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Skill = sequelize.define("skill", {
+  const JobEvent = sequelize.define("jobevent", {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -10,7 +10,11 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    date: {
+      type: Sequelize.DATE,
+      allowNull: false,
+    },
   });
 
-  return Skill;
+  return JobEvent;
 };

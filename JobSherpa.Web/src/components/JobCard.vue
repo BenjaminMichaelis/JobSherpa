@@ -24,7 +24,7 @@
         <span class="text-subtitle-1">Skills:</span>
         <v-chip-group>
           <v-chip v-for="(skill, index) in job.skills" :key="index">
-            {{ skill }}
+            {{ skill.name }}
           </v-chip>
         </v-chip-group>
       </div>
@@ -54,9 +54,14 @@
 </template>
 
 <script lang="ts" setup>
-import { Job } from "@/models/job";
-defineProps({
-  job: Job,
+import { defineProps } from "vue";
+
+const props = defineProps({
+  job: {
+    type: Object,
+    required: true,
+  },
 });
+
 const loading = false;
 </script>

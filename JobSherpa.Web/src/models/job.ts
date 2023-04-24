@@ -10,6 +10,7 @@ class Job {
   position: string;
   salary: string;
   skills: string[];
+  jobDate: Date;
 
   constructor(
     id: string,
@@ -21,7 +22,8 @@ class Job {
     activities: string[],
     position: string,
     salary: string,
-    skills: string[]
+    skills: string[],
+    jobDate: Date
   ) {
     this.id = id;
     this.name = name;
@@ -33,5 +35,6 @@ class Job {
     this.position = position;
     this.salary = salary;
     this.skills = skills;
+    this.jobDate = jobDate;
   }
 }

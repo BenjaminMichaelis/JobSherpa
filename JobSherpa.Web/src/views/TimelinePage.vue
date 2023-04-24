@@ -2,54 +2,59 @@
   <v-timeline>
     <v-timeline-item v-for="(item, index) in sortedItems" :key="index">
       <v-card>
-        <v-card-title>{{ item.title }}</v-card-title>
-        <v-card-subtitle>{{ formatDate(item.date) }}</v-card-subtitle>
-        <v-card-text>{{ item.type }}</v-card-text>
+        <v-card-title>{{ item.name }}</v-card-title>
+        <v-card-subtitle>
+          Events: {{ item.events.join(", ") }}
+          <br />
+          Activities: {{ item.activities.join(", ") }}
+        </v-card-subtitle>
+        <v-card-text>{{ formatDate(item.jobDate) }}</v-card-text>
       </v-card>
     </v-timeline-item>
   </v-timeline>
 </template>
 
 <script>
-import { ToDo } from "@/models/ToDo";
+import { ref, computed, onMounted } from "vue";
+import { useStore } from "vuex";
+import { Job } from "@/models/job";
+import UserDataService from "@/services/UserDataService";
 
 export default {
-  data() {
-    return {
-      todos: [
-        new ToDo(
-          "1",
-          "Interview with Google",
-          new Date(2023, 3, 15),
-          "Interview"
-        ),
-        new ToDo(
-          "2",
-          "Phone call with Software Inc",
-          new Date(2023, 3, 18),
-          "Event"
-        ),
-        new ToDo(
-          "3",
-          "Interview with Apple Co",
-          new Date(2023, 3, 20),
-          "Interview"
-        ),
-      ],
+  setup() {
+    const store = useStore();
+
+    const jobs = ref(null);
+
+    const getJobs = async () => {
+      try {
+        const jobsData = await UserDataService.getUserJobs(
+          store.state.user.username
+        );
+        console.log("jobsData:", jobsData);
+        jobs.value = jobsData;
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
     };
-  },
-  computed: {
-    sortedItems() {
-      return this.sortTodosByDate();
-    },
-  },
-  methods: {
-    formatDate(date) {
-      return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-    },
-    sortTodosByDate() {
-      return this.todos.slice().sort((a, b) => a.date - b.date);
-    },
+
+    onMounted(getJobs);
+
+    const formatDate = (date) => {
+      const d = new Date(date);
+      return `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
+    };
+
+    const sortedItems = computed(() => {
+      if (!jobs.value) {
+        return [];
+      }
+      return jobs.value
+        .slice()
+        .sort((a, b) => new Date(a.jobDate) - new Date(b.jobDate));
+    });
+
+    return { formatDate, sortedItems };
   },
 };
 </script>

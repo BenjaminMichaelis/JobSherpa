@@ -135,6 +135,13 @@ const sidebarLinks = computed(() => {
       isDivider: false,
     },
     {
+      route: "/timeline",
+      icon: "mdi-timeline-text",
+      name: "Timeline",
+      isVisible: true,
+      isDivider: false,
+    },
+    {
       route: "",
       icon: "",
       name: "",
