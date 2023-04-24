@@ -7,6 +7,7 @@ module.exports = (app) => {
   router.post("/", users.create);
 
   // Retrieve all users
+
   router.get("/", function (req, res) {
     users.findAll(req, res);
   });
